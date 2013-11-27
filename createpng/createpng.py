@@ -12,6 +12,8 @@ typearr = {'IHDR': ['\x49', '\x48', '\x44', '\x52'],
 			'pHYs':['\x70', '\x48', '\x59', '\x73'],
 			'sPLT':['\x73', '\x50', '\x4c', '\x54'],
 			'iCCP':['\x69', '\x43', '\x43', '\x50'],
+			'gAMA':['\x67', '\x41', '\x4d', '\x41'],
+			'cHRM':['\x63', '\x48', '\x52', '\x4d'],
 			}
 
 
@@ -70,6 +72,29 @@ createpng.write_chunk(typearr['IHDR'],
 
 #--------------------------------------------------------------------------
 ###
+# gAMA
+
+# 4 bytes
+
+#--------------------------------------------------------------------------
+###
+# cHRM
+
+#   White Point x: 4 bytes
+#   White Point y: 4 bytes
+#   Red x:         4 bytes
+#   Red y:         4 bytes
+#   Green x:       4 bytes
+#   Green y:       4 bytes
+#   Blue x:        4 bytes
+#   Blue y:        4 bytes
+
+# Each value is encoded as a 4-byte unsigned integer, representing the x or y value times 100000. For example, a value of 0.3127 would be stored as the integer 31270. 
+
+
+
+#--------------------------------------------------------------------------
+###
 # A zTXt chunk contains:
 
 #   Keyword:            1-79 bytes (character string)
@@ -112,7 +137,7 @@ import zlib
 # 1x1 pixel image data
 d = '\x01\xea'
 
-z += [i for i in zlib.compress(d)]
+z = [i for i in zlib.compress(d)]
 
 createpng.write_chunk(typearr['IDAT'], z, f)
 
