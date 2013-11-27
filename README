@@ -1,0 +1,7 @@
+Python library for creating PNG image data.
+
+A PNG file consists of chunks. With this library custom chunks can be created for testing decoders.
+
+The current createpng.py consists of code to create the smallest PNG file (I think). The PNG specification state that a empty IDAT chunk should also be valid, but most decoders sayeth nay.
+
+ 
